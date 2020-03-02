@@ -1,8 +1,8 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 const axiosWithAuth = () => {
 
-    return Axios.create({
+    return axios.create({
         baseURL: 'https://sleep-tracker-1.herokuapp.com',
         headers: {
             authorization : localStorage.getItem('token')
