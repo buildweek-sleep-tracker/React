@@ -3,6 +3,9 @@ import '../App.css';
 import styled from 'styled-components'
 import axiosWithAuth from '../utils/axiosWithAuth'
 import axios from 'axios'
+import { BrowserRouter as 
+  Link,
+  } from 'react-router-dom';
 
 
 const Button = styled.button`
@@ -13,8 +16,8 @@ class Login extends React.Component {
 
   state = {
     creds: {
-      email: 'test',
-      password: 'test'
+      email: '',
+      password: ''
     }
   }
 
@@ -23,21 +26,13 @@ class Login extends React.Component {
     this.setState({
       creds: {
         ...this.state.creds,
-        [e.target.value]: e.target.value
+        [e.target.name]: e.target.value
       }
     });
   };
 
   login = e => {
     e.preventDefault();
-
-    // axios()
-    //   .post('/login', this.state.creds)
-    //   .then(results => {
-    //     console.log(results);
-    //     localStorage.setItem("token", results.data.payload);
-    //     this.props.history.push('protected');
-    //   })
 
       axios
         .post('https://sleep-tracker-1.herokuapp.com/api/auth/login', this.state.creds)
@@ -49,11 +44,23 @@ class Login extends React.Component {
         })
   };
 
+  signup = e =>{
+    e.preventDefault();
+
+    axios.post('https://sleep-tracker-1.herokuapp.com/api/auth/register', this.state.creds)
+        .then(res =>{
+            console.log("new user", res);
+        })
+        .catch(error=>{
+            console.log("there was an error: ", error)
+        })
+  }
+
 
   render() {
     return (
       <div className="Login">
-          <form onSubmit={this.login}>
+          <form >
               <label>Email:</label>
               <input 
                 type="text"
@@ -70,7 +77,11 @@ class Login extends React.Component {
                 value = {this.state.creds.password}
                 onChange = {this.handleChange}
                 />
-              <button>Login!</button>
+            <Link>
+              <button onClick={this.login}>Login!</button>
+            </Link>
+              
+              <h1>Havent Signed up yet?<button onClick={this.signup}>SignUp</button></h1>
           </form>
       </div>
     );

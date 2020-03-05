@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+import SignUp from './components/SignUp';
 import Login from './components/Login'
 import MainPage from './components/MainPage'
 
@@ -14,7 +15,10 @@ function App() {
     <Router>
       <Switch>
         <Route path='/Login'>
-          {/* <Login/> */}
+          <Login/>
+        </Route>
+        <Route path='/SignUp'>
+          <SignUp/>
         </Route>
         <Route path='/HomePage'>
           <MainPage/>
