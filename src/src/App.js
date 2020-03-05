@@ -2,15 +2,25 @@ import React from 'react';
 import './App.css';
 
 import Login from './components/Login'
+import MainPage from './components/MainPage'
+
+import { BrowserRouter as Router,
+  Route,
+  Link,
+  Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-
-      <header className="App-header">
-        <Login/>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path='/Login'>
+          {/* <Login/> */}
+        </Route>
+        <Route path='/HomePage'>
+          <MainPage/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
