@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import { BrowserRouter as 
     Link,
     } from 'react-router-dom';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBInput } from 'mdbreact';
 import axios from 'axios'
 
 
 const SignUp = () => {
 
     const [userReg, setUserReg] = useState({
-        name: '',
-        username:'',
+        email: '',
+        password:'',
     })
 
     const handleChange = (e) =>{
@@ -23,6 +23,8 @@ const SignUp = () => {
     }
 
     const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log(userReg);
         axios.post('https://sleep-tracker-1.herokuapp.com/api/auth/register', userReg)
             .then(res =>{
                 console.log("new user", res);
@@ -37,17 +39,17 @@ const SignUp = () => {
             <form onSubmit={handleSubmit}>
                     <p>Welcome! Sign Up to see your sleep or upload new ones.</p>
                     <div className="grey-text">
-                        <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong" success="right"  onChange={handleChange}/>
-                        <MDBInput label="Type your password" icon="lock" group type="password" onChange={handleChange}/>
+                        <MDBInput name="email" label="Type your email" icon="envelope" group type="email" validate error="wrong" success="right"  onChange={handleChange}/>
+                        <MDBInput name="password" label="Type your password" icon="lock" group type="password" onChange={handleChange}/>
                     </div>
                     <div className="text-center">
                         <Button>
-                            <Link to='/Homepage'>Login</Link>
+                            <Link to='/MainPage'>Sign Up</Link>
                         </Button>
                     </div>
                 </form>
                 <p> Have an account?
-                    <Link to='/Login'> Login</Link>
+                    <Button><Link to='/Login'>Login</Link></Button>
                 </p>
         </div>
     );
